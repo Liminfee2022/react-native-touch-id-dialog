@@ -1,4 +1,4 @@
-declare module 'react-native-touch-id' {
+declare module 'react-native-touch-id-update-dialog' {
     /**
      * The supported biometry type
      */

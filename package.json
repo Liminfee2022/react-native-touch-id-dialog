@@ -1,5 +1,5 @@
 {
-  "name": "react-native-touch-id-update-popup",
+  "name": "react-native-touch-id-update-dialog",
   "version": "1.0.0",
   "description": "React Native authentication with the native Touch ID popup.",
   "scripts": {
