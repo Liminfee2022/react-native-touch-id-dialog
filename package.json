@@ -1,5 +1,5 @@
 {
-  "name": "react-native-touch-id-update-dialog",
+  "name": "react-native-touch-id-dialog",
   "version": "1.2.0",
   "description": "React Native authentication with the native Touch ID popup.",
   "scripts": {
@@ -11,7 +11,7 @@
   "types": "index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Liminfee2022/react-native-touch-id-update-popup.git"
+    "url": "https://github.com/Liminfee2022/react-native-touch-id-dialog.git"
   },
   "keywords": [
     "react-native",
@@ -28,9 +28,9 @@
   "author": "Liminfee2022 <nguyenhungphi2022@gmail.com> (https://github.com/Liminfee2022)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Liminfee2022/react-native-touch-id-update-popup/issues"
+    "url": "https://github.com/Liminfee2022/react-native-touch-id-dialog/issues"
   },
-  "homepage": "https://github.com/Liminfee2022/react-native-touch-id-update-popup",
+  "homepage": "https://github.com/Liminfee2022/react-native-touch-id-dialog",
   "devDependencies": {
     "eslint": "2.0.0",
     "eslint-plugin-react": "2.7.1"
