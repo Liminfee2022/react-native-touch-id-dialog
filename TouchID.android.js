@@ -1,6 +1,6 @@
-import { NativeModules, processColor } from 'react-native';
-import { androidApiErrorMap, androidModuleErrorMap } from './data/errors';
-import { getError, TouchIDError, TouchIDUnifiedError } from './errors';
+import { NativeModules, processColor } from "react-native";
+import { androidApiErrorMap, androidModuleErrorMap } from "./data/errors";
+import { getError, TouchIDError, TouchIDUnifiedError } from "./errors";
 const NativeTouchID = NativeModules.FingerprintAuth;
 
 export default {
@@ -10,7 +10,7 @@ export default {
         (error, code) => {
           return reject(createError(config, error, code));
         },
-        success => {
+        (success) => {
           return resolve(true);
         }
       );
@@ -19,15 +19,16 @@ export default {
 
   authenticate(reason, config) {
     var DEFAULT_CONFIG = {
-      title: 'Authentication Required',
-      imageColor: '#1306ff',
-      imageErrorColor: '#ff0000',
-      sensorDescription: 'Touch sensor',
-      sensorErrorDescription: 'Failed',
-      cancelText: 'Cancel',
-      unifiedErrors: false
+      authenticationFailed: "Not recognized. Try again.",
+      title: "Authentication Required",
+      imageColor: "#1306ff",
+      imageErrorColor: "#ff0000",
+      sensorDescription: "Touch sensor",
+      sensorErrorDescription: "Failed",
+      cancelText: "Cancel",
+      unifiedErrors: false,
     };
-    var authReason = reason ? reason : ' ';
+    var authReason = reason ? reason : " ";
     var authConfig = Object.assign({}, DEFAULT_CONFIG, config);
     var imageColor = processColor(authConfig.imageColor);
     var imageErrorColor = processColor(authConfig.imageErrorColor);
@@ -42,12 +43,12 @@ export default {
         (error, code) => {
           return reject(createError(authConfig, error, code));
         },
-        success => {
+        (success) => {
           return resolve(true);
         }
       );
     });
-  }
+  },
 };
 
 function createError(config, error, code) {
@@ -58,5 +59,5 @@ function createError(config, error, code) {
     return new TouchIDUnifiedError(getError(errorCode));
   }
 
-  return new TouchIDError('Touch ID Error', error, errorCode);
+  return new TouchIDError("Touch ID Error", error, errorCode);
 }

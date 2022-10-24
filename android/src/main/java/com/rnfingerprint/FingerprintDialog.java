@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.view.WindowManager;
+import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.Color;
 
 import com.facebook.react.bridge.ReadableMap;
 
@@ -25,6 +30,7 @@ public class FingerprintDialog extends DialogFragment implements FingerprintHand
     private ImageView mFingerprintImage;
     private TextView mFingerprintSensorDescription;
     private TextView mFingerprintError;
+    private Button mCancelButton;
 
     private String authReason;
     private int imageColor = 0;
@@ -38,23 +44,22 @@ public class FingerprintDialog extends DialogFragment implements FingerprintHand
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         this.mFingerprintHandler = new FingerprintHandler(context, this);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Material_Light_Dialog);
+        setStyle(DialogFragment.STYLE_NO_FRAME,
+                R.style.DialogStyle);
         setCancelable(false);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fingerprint_dialog, container, false);
-
         final TextView mFingerprintDescription = (TextView) v.findViewById(R.id.fingerprint_description);
-        mFingerprintDescription.setText(this.authReason);
+        mFingerprintDescription.setText(this.dialogTitle);
 
         this.mFingerprintImage = (ImageView) v.findViewById(R.id.fingerprint_icon);
         if (this.imageColor != 0) {
@@ -67,15 +72,18 @@ public class FingerprintDialog extends DialogFragment implements FingerprintHand
         this.mFingerprintError = (TextView) v.findViewById(R.id.fingerprint_error);
         this.mFingerprintError.setText(this.errorText);
 
-        final Button mCancelButton = (Button) v.findViewById(R.id.cancel_button);
+        this.mCancelButton = (Button) v.findViewById(R.id.cancel_button);
         mCancelButton.setText(this.cancelText);
+        ;
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onCancelled();
             }
         });
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+        getDialog().getWindow().setGravity(Gravity.BOTTOM);
         getDialog().setTitle(this.dialogTitle);
         getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
@@ -93,6 +101,7 @@ public class FingerprintDialog extends DialogFragment implements FingerprintHand
 
     @Override
     public void onResume() {
+
         super.onResume();
 
         if (this.isAuthInProgress) {
@@ -111,7 +120,6 @@ public class FingerprintDialog extends DialogFragment implements FingerprintHand
             this.isAuthInProgress = false;
         }
     }
-
 
     public void setCryptoObject(FingerprintManager.CryptoObject cryptoObject) {
         this.mCryptoObject = cryptoObject;
@@ -175,6 +183,7 @@ public class FingerprintDialog extends DialogFragment implements FingerprintHand
         this.mFingerprintError.setText(errorString);
         this.mFingerprintImage.setColorFilter(this.imageErrorColor);
         this.mFingerprintSensorDescription.setText(this.sensorErrorDescription);
+        this.mCancelButton.setTextColor(Color.parseColor("#00D770"));
     }
 
     @Override

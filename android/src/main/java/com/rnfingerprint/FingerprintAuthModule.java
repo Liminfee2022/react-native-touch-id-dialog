@@ -67,7 +67,8 @@ public class FingerprintAuthModule extends ReactContextBaseJavaModule implements
 
     @TargetApi(Build.VERSION_CODES.M)
     @ReactMethod
-    public void authenticate(final String reason, final ReadableMap authConfig, final Callback reactErrorCallback, final Callback reactSuccessCallback) {
+    public void authenticate(final String reason, final ReadableMap authConfig, final Callback reactErrorCallback,
+            final Callback reactSuccessCallback) {
         final Activity activity = getCurrentActivity();
         if (inProgress || !isAppActive || activity == null) {
             return;
@@ -96,6 +97,9 @@ public class FingerprintAuthModule extends ReactContextBaseJavaModule implements
 
         final DialogResultHandler drh = new DialogResultHandler(reactErrorCallback, reactSuccessCallback);
 
+        // final FingerprintHandler fingerprintHandler = new FingerprintHandler();
+        // fingerprintHandler.setErrorText(authConfig.getString("authenticationFailed"));
+        FingerprintHandler.setErrorText(authConfig.getString("authenticationFailed"));
         final FingerprintDialog fingerprintDialog = new FingerprintDialog();
         fingerprintDialog.setCryptoObject(cryptoObject);
         fingerprintDialog.setReasonForAuthentication(reason);
@@ -125,7 +129,8 @@ public class FingerprintAuthModule extends ReactContextBaseJavaModule implements
         // We should call it only when we absolutely sure that API >= 23.
         // Otherwise we will get the crash on older versions.
         // TODO: migrate to FingerprintManagerCompat
-        final FingerprintManager fingerprintManager = (FingerprintManager) activity.getSystemService(Context.FINGERPRINT_SERVICE);
+        final FingerprintManager fingerprintManager = (FingerprintManager) activity
+                .getSystemService(Context.FINGERPRINT_SERVICE);
 
         if (fingerprintManager == null || !fingerprintManager.isHardwareDetected()) {
             return FingerprintAuthConstants.NOT_PRESENT;
