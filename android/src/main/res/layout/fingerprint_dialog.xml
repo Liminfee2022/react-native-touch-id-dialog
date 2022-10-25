@@ -35,8 +35,8 @@
 
         <ImageView
             android:id="@+id/fingerprint_icon"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="32dp"
             android:gravity="left"
             android:src="@drawable/ic_fp_40px" />
@@ -45,7 +45,7 @@
             android:id="@+id/fingerprint_sensor_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="Touch the fingerprint sensor"
             android:textColor="#3A4667"
@@ -54,7 +54,7 @@
             android:id="@+id/fingerprint_error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="40dp"
             android:gravity="center"
             android:text="TextView"
             android:textColor="#F00"
@@ -67,12 +67,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|left"
-        android:paddingRight="15dp"
-        android:paddingLeft="15dp"
-        android:layout_marginEnd="10dp"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:layout_marginEnd="20dp"
         android:background="#fff"
         android:text="PIN"
-        android:textColor="#3A4667"
+        android:textColor="#00D770"
+        android:textSize="16dp"
          />
 
 </LinearLayout>
